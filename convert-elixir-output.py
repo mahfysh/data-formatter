@@ -1,39 +1,46 @@
-#Python
+# Python
 
 import os
 import sys
+from tkinter import Tk, filedialog
 
-script_dir = os.path.dirname(__file__)
-
-#abs_file_path = os.path.join(script_dir, rel_path)
 
 def main():
+    print(sys.version)
+    root = Tk()
+    root.withdraw()
+    rel_path = filedialog.askopenfilename()
+    root.destroy()
 
-    rel_path = raw_input('Specify source file path: ')
-    target_path = raw_input('Specify target file path: ')
+    while True:
+        target_path = os.path.dirname(rel_path)
+        filename = input('Specify filename: ')
+        target_path = target_path + '/' + filename + '.txt'
+        if target_path == rel_path:
+            print('Target filename cannot be the same as source filename.')
+        else:
+            break
 
     with open(rel_path) as f:
+
         with open(target_path, "w+") as t:
-            str = f.read()
-            str = str.replace('], ', '\n')
-            str = str.replace('[', '')
-            str = str.replace('"', '')
-            str = str.replace(',', '\t')
 
-            t.write(str)
-
+            content = f.read()
+            content = content.replace('], ', '\n')
+            content = content.replace('[', '')
+            content = content.replace('"', '')
+            content = content.replace(',', '\t')
+            t.write(content)
+            print('File created at: ' + target_path)
             t.close()
-            if t.closed:
-                print 'Target file closed'
-            else: print 'ERROR'
+            if not t.closed:
+                print('Target file not closed')
 
         f.close()
-        if f.closed:
-            print 'Source file closed'
-        else: print 'ERROR'
+        if not f.closed:
+            print('Source file not closed')
 
-    print ('DONE')
-
+    print('DONE')
 
 
 if __name__ == '__main__':
