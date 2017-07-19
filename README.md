@@ -11,6 +11,7 @@ Extract data from backend and format it better way, made using Python.
 using tabs to:
 
 text1	text2 ... textn
+
 text1 text2 ... textn
 ...
 text1 text2 ... textn
