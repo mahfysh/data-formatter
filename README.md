@@ -11,8 +11,12 @@ Extract data from backend and format it better way, made using Python.
 using tabs to:
 
 text1	text2 ... textn
+
 text1 text2 ... textn
+
 ...
+
 text1 text2 ... textn
+
 
 so it's easier to paste it to csv, google sheet or anything
