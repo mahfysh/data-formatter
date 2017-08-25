@@ -60,8 +60,7 @@ def open_files():
             break
 
     with open(rel_path, "r") as f:
-
-        with open(target_path, "w+") as t:
+        with open(target_path, "w") as t:
 
             print('File created at: ' + target_path)
             return f, t
@@ -69,10 +68,10 @@ def open_files():
 
 def main():
 
-    print(sys.version)
-
     source_file, target_file = open_files()
+    # arrrgh! files closed!
 
+    # Files are opened, define method you want to use
     delete_line(source_file, target_file)
 
     print('DONE')
