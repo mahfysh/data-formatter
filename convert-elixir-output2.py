@@ -32,6 +32,16 @@ def change_string(f, t):
         t.write(content)
 
 
+def delete_line(f, t):
+
+    for _ in f:
+
+        content = f.readline()
+        test = re.search('failed', content)
+        if test:
+            t.write(content)
+
+
 def open_files():
     root = Tk()
     root.withdraw()
@@ -54,16 +64,6 @@ def open_files():
             delete_line(f, t)
 
     print('File created at: ' + target_path)
-
-
-def delete_line(f, t):
-
-    for _ in f:
-
-        content = f.readline()
-        test = re.search('failed', content)
-        if test:
-            t.write(content)
 
 
 def main():
