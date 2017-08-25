@@ -5,6 +5,8 @@ import sys
 from tkinter import Tk, filedialog
 import re
 
+# TODO convert those methods to a class
+
 
 def extract_string(f, t):
 
