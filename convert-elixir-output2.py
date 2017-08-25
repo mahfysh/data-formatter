@@ -3,10 +3,36 @@
 import os
 import sys
 from tkinter import Tk, filedialog
+import re
 
 
-def main():
-    print(sys.version)
+def extract_string():
+
+    for _ in f:
+        content = f.readline()
+        content = re.search('KingsPay(.+?)\\\\",', content)
+
+        if content:
+            found = content.group(0)
+            found = found.replace('\\",', "\n")
+            t.write(found)
+
+
+def change_string(f, t):
+
+    if f:
+        print('Files found')
+    else:
+        print('Error: File not found')
+
+    for remove in ['{', '[', ']']:
+        content = f.read()
+        content = content.replace(remove, '')
+        content = content.replace('},', '\n')
+        t.write(content)
+
+
+def open_files():
     root = Tk()
     root.withdraw()
     rel_path = filedialog.askopenfilename()
@@ -21,33 +47,29 @@ def main():
         else:
             break
 
-    with open(rel_path) as f:
+    with open(rel_path, "r") as f:
 
         with open(target_path, "w+") as t:
 
-            content = f.read()
-            content = content.replace('}, ', '\n')
-            content = content.replace('{', '')
-            content = content.replace('[', '')
-            content = content.replace(']', '')
-            content = content.replace(':', '')
-            content = content.replace(', ', '\t')
-            content = content.replace('"', '')
-            content = content.replace('name=>', '')
-            content = content.replace('username=>', '')
-            content = content.replace('email=>', '')
-            content = content.replace('phone=>', '')
-            # content = content.replace(',', '\t')
+            delete_line(f, t)
+
+    print('File created at: ' + target_path)
+
+
+def delete_line(f, t):
+
+    for _ in f:
+
+        content = f.readline()
+        test = re.search('failed', content)
+        if test:
             t.write(content)
-            print('File created at: ' + target_path)
-            t.close()
-            if not t.closed:
-                print('Target file not closed')
 
-        f.close()
-        if not f.closed:
-            print('Source file not closed')
 
+def main():
+
+    print(sys.version)
+    open_files()
     print('DONE')
 
 
