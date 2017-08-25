@@ -6,7 +6,7 @@ from tkinter import Tk, filedialog
 import re
 
 
-def extract_string():
+def extract_string(f, t):
 
     for _ in f:
         content = f.readline()
@@ -61,15 +61,18 @@ def open_files():
 
         with open(target_path, "w+") as t:
 
-            delete_line(f, t)
-
-    print('File created at: ' + target_path)
+            print('File created at: ' + target_path)
+            return f, t
 
 
 def main():
 
     print(sys.version)
-    open_files()
+
+    source_file, target_file = open_files()
+
+    delete_line(source_file, target_file)
+
     print('DONE')
 
 
